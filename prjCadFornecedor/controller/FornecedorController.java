@@ -42,5 +42,14 @@ public class FornecedorController {
 	@DeleteMapping("/{id}")
 	public void deleFornecedor(@PathVariable Long id) {
 		fornecedorService.deletarFornecedor(id);
+
+		@PutMapping("/{id}")
+	public ResponseEntity<Fornecedor> atualizaFornecedor(@PathVariable Long id, @RequestBody Fornecedor fornecedor){
+		Fornecedor atualizado = fornecedorService.updateFornecedor(id, fornecedor);
+		if(atualizado != null) {
+			return ResponseEntity.ok(atualizado);
+		}else {
+			return ResponseEntity.notFound().build();		}
 	}
+
 }
